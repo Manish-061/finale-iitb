@@ -1,0 +1,32 @@
+/* Hide default cursor when custom cursor is active */
+.cursor-none {
+  cursor: none !important;
+}
+
+.cursor-none * {
+  cursor: none !important;
+}
+
+/* Respect user preferences for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-none {
+    cursor: auto !important;
+  }
+  
+  .cursor-none * {
+    cursor: auto !important;
+  }
+}
+
+/* Ensure cursor elements don't interfere with interactions */
+.cursor-element {
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .cursor-element {
+    filter: invert(1);
+  }
+}

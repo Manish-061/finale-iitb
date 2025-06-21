@@ -1,0 +1,48 @@
+/* Custom skeleton animations */
+.react-loading-skeleton {
+  --base-color: #f3f4f6;
+  --highlight-color: #e5e7eb;
+  --animation-duration: 1.5s;
+  --animation-direction: normal;
+  --pseudo-element-display: block;
+}
+
+/* Enhanced skeleton animation for partner cards */
+.partner-skeleton {
+  animation: skeleton-loading 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: #f3f4f6;
+  }
+  100% {
+    background-color: #e5e7eb;
+  }
+}
+
+/* Responsive skeleton adjustments */
+@media (max-width: 768px) {
+  .react-loading-skeleton {
+    --animation-duration: 1.2s;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .react-loading-skeleton {
+    --base-color: #d1d5db;
+    --highlight-color: #9ca3af;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .react-loading-skeleton {
+    --animation-duration: 0s;
+  }
+  
+  .partner-skeleton {
+    animation: none;
+  }
+}
