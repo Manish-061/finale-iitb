@@ -7,7 +7,7 @@ const testimonials = [
     id: 1,
     name: "Mirunalini R",
     role: "Data Analyst Intern",
-    image: "/assets/images/avatar1.jpg", // Replace with actual image paths
+    image: "/assets/images/avatar1.jpg",
     text: "During my Data Analytics internship at INLIGHN TECH, I learned SQL, Power BI, Tableau, and Data Cleaning. The program focused on real-world business intelligence projects, which helped me understand data-driven decision-making. The mentorship and structured learning approach made a significant impact on my skills."
   },
   {
@@ -44,21 +44,21 @@ const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const testimonialsRef = useRef(null);
-  
+
   const goToPrevious = () => {
     setDirection(-1);
     setCurrentIndex((prevIndex) => 
       prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
     );
   };
-  
+
   const goToNext = () => {
     setDirection(1);
     setCurrentIndex((prevIndex) => 
       prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
     );
   };
-  
+
   // Animation variants
   const slideVariants = {
     enter: (direction) => ({
@@ -84,8 +84,65 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-blue-50" id="testimonials">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-16 md:py-24 bg-blue-50 relative overflow-hidden" id="testimonials">
+      {/* Floating background circles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -top-20 -left-20 w-96 h-96 bg-blue-100 rounded-full opacity-10"
+          animate={{
+            x: [0, 100, -50, 0],
+            y: [0, -50, 100, 0],
+            scale: [1, 1.2, 0.8, 1],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute -bottom-20 -right-20 w-80 h-80 bg-blue-200 rounded-full opacity-10"
+          animate={{
+            x: [0, -80, 60, 0],
+            y: [0, 60, -80, 0],
+            scale: [1, 0.8, 1.3, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+      </div>
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-blue-400 rounded-full opacity-20"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, Math.random() * 10 - 5, 0],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">
             What Our Interns Say
@@ -106,7 +163,7 @@ const Testimonials = () => {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="bg-white rounded-xl p-8 shadow-lg w-full max-w-3xl"
+                  className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg w-full max-w-3xl"
                 >
                   <div className="flex flex-col md:flex-row gap-6 items-center">
                     <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 bg-blue-100">
@@ -134,27 +191,31 @@ const Testimonials = () => {
             
             {/* Navigation Buttons */}
             <div className="flex justify-center mt-8 gap-4">
-              <button 
+              <motion.button
                 onClick={goToPrevious}
                 className="bg-white p-3 rounded-full shadow-md hover:bg-blue-50 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft size={24} className="text-blue-600" />
-              </button>
+              </motion.button>
               
-              <button 
+              <motion.button
                 onClick={goToNext}
                 className="bg-white p-3 rounded-full shadow-md hover:bg-blue-50 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 aria-label="Next testimonial"
               >
                 <ChevronRight size={24} className="text-blue-600" />
-              </button>
+              </motion.button>
             </div>
             
             {/* Indicator Dots */}
             <div className="flex justify-center mt-4 gap-2">
               {testimonials.map((_, index) => (
-                <button
+                <motion.button
                   key={index}
                   onClick={() => {
                     setDirection(index > currentIndex ? 1 : -1);
@@ -163,6 +224,8 @@ const Testimonials = () => {
                   className={`w-3 h-3 rounded-full ${
                     index === currentIndex ? 'bg-blue-600' : 'bg-gray-300'
                   }`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.8 }}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}

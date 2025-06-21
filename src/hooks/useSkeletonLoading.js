@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useSkeletonLoading = (duration = 4000, dependencies = []) => {
+const useSkeletonLoading = (duration = 3000, dependencies = []) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
