@@ -26,3 +26,30 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1a1;
 }
+
+/* Enhanced gradient background */
+.hero-gradient {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.1) 0%, 
+    rgba(147, 197, 253, 0.1) 25%, 
+    rgba(255, 255, 255, 0.9) 50%, 
+    rgba(239, 246, 255, 0.8) 75%, 
+    rgba(59, 130, 246, 0.1) 100%);
+}
+
+/* Glow effect for tech elements */
+.tech-glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Smooth animations */
+.smooth-animation {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Performance optimization for 3D elements */
+.canvas-container {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
