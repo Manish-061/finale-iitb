@@ -10,6 +10,19 @@ This project is a submission for **Front-End Battle IITB** (Round 2: Creativity 
 
 ---
 
+## 🎨 Screenshots
+
+### Home Page
+![Home Page](screenshots/homepage.png) 
+
+### Programs Page
+![Benefits](screenshots/benefits.png)
+
+### Testimonials Page
+![Footer](screenshots/footer.png)
+
+---
+
 ## 🎯 Key Features
 
 - **Modern UI/UX Design:** Clean, intuitive interface with a tech-centric look and feel.
@@ -76,12 +89,6 @@ This project is a submission for **Front-End Battle IITB** (Round 2: Creativity 
 - **Tailwind CSS Animations:** For custom animation effects and responsive design.
 - **React Three Fiber:** For 3D graphics and animations.
 - **Framer Motion:** For advanced animations and micro-interactions.
-
----
-
-## 🎨 Screenshots
-
-*Screenshots coming soon...*
 
 ---
 
