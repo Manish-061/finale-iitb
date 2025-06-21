@@ -5,12 +5,14 @@ import Stats from '../components/Stats';
 import Benefits from '../components/Benefits';
 import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
+import VerifyCertificatePage from '../pages/VerifyCertificate';
 
 const Home = () => {
   return (
     <main>
       <Hero />
       <CertificationPartners />
+      <VerifyCertificatePage />
       <About />
       <Stats />
       <Benefits />
