@@ -16,7 +16,7 @@ const CustomCursor = () => {
   const cursorY = useMotionValue(0);
   
   // Spring configuration for smooth animation
-  const springConfig = { damping: 20, stiffness: 200, mass: 0.5 };
+  const springConfig = { damping: 20, stiffness: 100, mass: 0.5 };
   const smoothX = useSpring(cursorX, springConfig);
   const smoothY = useSpring(cursorY, springConfig);
   
