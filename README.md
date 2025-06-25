@@ -102,7 +102,7 @@ This project is a submission for **Front-End Battle IITB** (Round 2: Creativity 
 
 ## 🙌 Credits
 
-- **Design & Development:** Manish Kumar + Perplexity AI
+- **Design & Development:** Manish Kumar
 - **Icons:** Lucide Icons
 - **Animation Libraries:** Framer Motion, React Three Fiber
 - **Inspired by:** Inlighn Tech, Eduard Bodak, New Engen, Micro
