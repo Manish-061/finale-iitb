@@ -6,7 +6,7 @@ A complete, responsive redesign of the official Inlighn Tech website, integratin
 
 ## 📌 Overview
 
-This project is a submission for **Front-End Battle IITB** (Round 2: Creativity & Redesign). It aims to elevate the user experience of Inlighn Tech—a company offering immersive internship programs in Cybersecurity, Full Stack Development, Data Science, and Data Analysis—by creating a visually engaging, interactive, and professional website that appeals to tech-savvy students and young professionals.
+This project aims to elevate the user experience of Inlighn Tech—a company offering immersive internship programs in Cybersecurity, Full Stack Development, Data Science, and Data Analysis—by creating a visually engaging, interactive, and professional website that appeals to tech-savvy students and young professionals.
 
 ---
 
