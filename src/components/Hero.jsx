@@ -149,6 +149,8 @@ import * as THREE from 'three';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Box, Sphere, Torus } from '@react-three/drei';
 import { Link } from 'react-router-dom';
+import { use3DOptimization } from '../hooks/use3DOptimization';
+import { useAnimation } from '../contexts/AnimationContext';
 
 // Original Animated 3D shape component (Wireframe Dodecahedron)
 const AnimatedShape = () => {
@@ -313,6 +315,9 @@ const CombinedScene = () => {
 };
 
 const Hero = () => {
+  const canRender3D = use3DOptimization();
+  const { animationsEnabled, reducedMotion } = useAnimation();
+  const enable3D = canRender3D && animationsEnabled && !reducedMotion;
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -338,11 +343,17 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-white via-blue-50 to-blue-100 pt-16">
       
       {/* Enhanced 3D Animation Background with both animations */}
-      <div className="absolute inset-0 z-0">
-        <Canvas shadows>
-          <CombinedScene />
-        </Canvas>
-      </div>
+      {enable3D && (
+        <div className="absolute inset-0 z-0">
+          <Canvas
+            shadows
+            dpr={[1, 1.5]}
+            gl={{ antialias: false, powerPreference: 'high-performance' }}
+          >
+            <CombinedScene />
+          </Canvas>
+        </div>
+      )}
       
       {/* Animated particles background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -354,11 +365,11 @@ const Hero = () => {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.3, 0.7, 0.3],
-              scale: [1, 1.5, 1],
-            }}
+            animate={
+              animationsEnabled && !reducedMotion
+                ? { y: [0, -30, 0], opacity: [0.3, 0.7, 0.3], scale: [1, 1.5, 1] }
+                : { opacity: 0.2 }
+            }
             transition={{
               duration: 3 + Math.random() * 2,
               repeat: Infinity,
@@ -463,13 +474,13 @@ const Hero = () => {
       {/* Scroll indicator */}
       <motion.div 
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
+        animate={animationsEnabled && !reducedMotion ? { y: [0, 10, 0] } : {}}
         transition={{ duration: 2, repeat: Infinity }}
       >
         <div className="w-6 h-10 border-2 border-blue-600 rounded-full flex justify-center">
           <motion.div 
             className="w-1 h-3 bg-blue-600 rounded-full mt-2"
-            animate={{ y: [0, 12, 0] }}
+            animate={animationsEnabled && !reducedMotion ? { y: [0, 12, 0] } : {}}
             transition={{ duration: 2, repeat: Infinity }}
           />
         </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -76,17 +77,17 @@ const Navbar = () => {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
-          <a href="/" className="text-gray-800 hover:text-blue-600 transition-colors">Home</a>
-          <a href="/about" className="text-gray-800 hover:text-blue-600 transition-colors">About Us</a>
-          <a href="/programs" className="text-gray-800 hover:text-blue-600 transition-colors">Programs</a>
-          <a href="/verify" className="text-gray-800 hover:text-blue-600 transition-colors">Verify Certificate</a>
-          <a href="/contact" className="text-gray-800 hover:text-blue-600 transition-colors">Contact Us</a>
-          <a 
-            href="/login" 
+          <Link to="/" className="text-gray-800 hover:text-blue-600 transition-colors">Home</Link>
+          <Link to="/about" className="text-gray-800 hover:text-blue-600 transition-colors">About Us</Link>
+          <Link to="/programs" className="text-gray-800 hover:text-blue-600 transition-colors">Programs</Link>
+          <Link to="/verify" className="text-gray-800 hover:text-blue-600 transition-colors">Verify Certificate</Link>
+          <Link to="/contact" className="text-gray-800 hover:text-blue-600 transition-colors">Contact Us</Link>
+          <Link 
+            to="/login" 
             className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all transform hover:scale-105"
           >
             Login To Portal
-          </a>
+          </Link>
         </div>
         
         {/* Mobile Menu Button */}
@@ -112,48 +113,48 @@ const Navbar = () => {
             className="fixed inset-0 bg-white z-50 pt-20 px-4 md:hidden"
           >
             <div className="flex flex-col space-y-6 text-center">
-              <a 
-                href="/" 
+              <Link 
+                to="/" 
                 className="text-xl text-gray-800 py-2 border-b border-gray-100"
                 onClick={toggleMenu}
               >
                 Home
-              </a>
-              <a 
-                href="/about" 
+              </Link>
+              <Link 
+                to="/about" 
                 className="text-xl text-gray-800 py-2 border-b border-gray-100"
                 onClick={toggleMenu}
               >
                 About Us
-              </a>
-              <a 
-                href="/programs" 
+              </Link>
+              <Link 
+                to="/programs" 
                 className="text-xl text-gray-800 py-2 border-b border-gray-100"
                 onClick={toggleMenu}
               >
                 Programs
-              </a>
-              <a 
-                href="/verify" 
+              </Link>
+              <Link 
+                to="/verify" 
                 className="text-xl text-gray-800 py-2 border-b border-gray-100"
                 onClick={toggleMenu}
               >
                 Verify Certificate
-              </a>
-              <a 
-                href="/contact" 
+              </Link>
+              <Link 
+                to="/contact" 
                 className="text-xl text-gray-800 py-2 border-b border-gray-100"
                 onClick={toggleMenu}
               >
                 Contact Us
-              </a>
-              <a 
-                href="/login" 
+              </Link>
+              <Link 
+                to="/login" 
                 className="bg-blue-600 text-white px-6 py-3 rounded-full text-xl"
                 onClick={toggleMenu}
               >
                 Login To Portal
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import useMousePosition from '../hooks/useMousePosition';
 
 const CustomCursor = () => {
-  const { x, y } = useMousePosition();
   const cursorRef = useRef(null);
+  const rafIdRef = useRef(null);
+  const lastPointer = useRef({ x: 0, y: 0 });
   
   // State to track different cursor states
   const [isHovering, setIsHovering] = useState(false);
@@ -36,15 +36,24 @@ const CustomCursor = () => {
   
   // Update cursor position and handle interactions
   useEffect(() => {
-    if (x !== null && y !== null) {
-      cursorX.set(x);
-      cursorY.set(y);
-    }
+    // Pointer movement without triggering React re-renders
+    const onPointerMove = (e) => {
+      lastPointer.current.x = e.clientX;
+      lastPointer.current.y = e.clientY;
+      if (rafIdRef.current == null) {
+        rafIdRef.current = requestAnimationFrame(() => {
+          cursorX.set(lastPointer.current.x);
+          cursorY.set(lastPointer.current.y);
+          rafIdRef.current = null;
+        });
+      }
+    };
     
     // Handle click states
     const handleMouseDown = () => setIsClicking(true);
     const handleMouseUp = () => setIsClicking(false);
     
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
     document.addEventListener('mousedown', handleMouseDown);
     document.addEventListener('mouseup', handleMouseUp);
     
@@ -69,11 +78,13 @@ const CustomCursor = () => {
     
     // Cleanup
     return () => {
+      window.removeEventListener('pointermove', onPointerMove);
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mouseup', handleMouseUp);
+      if (rafIdRef.current != null) cancelAnimationFrame(rafIdRef.current);
       observer.disconnect();
     };
-  }, [x, y, cursorX, cursorY]);
+  }, [cursorX, cursorY]);
   
   // Hide cursor for touch devices
   if (isTouchDevice) {
@@ -90,6 +101,7 @@ const CustomCursor = () => {
           top: 0,
           x: smoothX,
           y: smoothY,
+          willChange: 'transform',
         }}
       >
         <motion.div
@@ -97,6 +109,7 @@ const CustomCursor = () => {
           style={{
             translateX: '-50%',
             translateY: '-50%',
+            willChange: 'transform',
           }}
           animate={{
             scale: isClicking ? 0.5 : isHovering ? 1.5 : 1,
@@ -113,12 +126,13 @@ const CustomCursor = () => {
       
       {/* Inner Dot */}
       <motion.div
-        className="fixed pointer-events-none z-51 mix-blend-difference"
+        className="fixed pointer-events-none z-[51] mix-blend-difference"
         style={{
           left: 0,
           top: 0,
           x: smoothX,
           y: smoothY,
+          willChange: 'transform',
         }}
       >
         <motion.div
@@ -126,6 +140,7 @@ const CustomCursor = () => {
           style={{
             translateX: '-50%',
             translateY: '-50%',
+            willChange: 'transform',
           }}
           animate={{
             scale: isClicking ? 1.5 : isHovering ? 0.5 : 1,
